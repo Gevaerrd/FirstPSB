@@ -2,14 +2,26 @@ package com.primeiroprojetosb.entities;
 
 import java.io.Serializable;
 
-// @Entity
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
+// import jakarta.persistence.Id;
+// import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
 
     private final static long serializable = 1L;
 
-    // @Id // Faz o campo ser identificado como o ID
-    // @GeneratedValue(strategy = GenerationType.IDENTITY) // Faz o valor ser gerado
-    // automaticamente
+    @Id // Faz o campo ser identificado como o ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
