@@ -34,15 +34,9 @@
 
 // git push
 
-// public class App {
-
-// public static void main(String[] args) {
-// EntityManagerFactory emf =
-// Persistence.createEntityManagerFactory("example-jpa");
-// EntityManager em = emf.createEntityManager();
-
-// em.close();
-// emf.close();
-// }
-
-// }
+// Entidades representam o modelo de dados
+// Repository fazem as entidades conversarem com o banco de dados
+// Resourcers lidam com requisições usando as entidades e Repository
+// Services fazem o filtro dos repository antes de chamar se for necessarios e
+// chama o repository
+// para atender os resourcers

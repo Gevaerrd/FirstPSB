@@ -21,7 +21,7 @@ public class TestConfig implements CommandLineRunner { // Injeção de dependenc
     // CommandLineRunner é uma interface que é usada para executar códigos dentro
     // dela
 
-    @Autowired // Injeta dependencia
+    @Autowired // Injeta a dependencia pra não precisar instanciar
     private UserRepository us;
 
     @Override
