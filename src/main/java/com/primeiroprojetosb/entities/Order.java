@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.Instant;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.primeiroprojetosb.enums.OrderStatus;
 
 @Entity
 @Table(name = "tb_order")
@@ -27,6 +30,9 @@ public class Order implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
 
+    @Enumerated(EnumType.STRING)
+    private Integer orderStatus;
+
     @ManyToOne // Muitos para um
     @JoinColumn(name = "client_id") // Nome que vai ficar no banco de dados
     private User client;
@@ -35,10 +41,23 @@ public class Order implements Serializable {
 
     }
 
-    public Order(Long id, Instant moment, User client) {
+    public Order(Long id, Instant moment, User client, OrderStatus orderStatus) {
         this.id = id;
         this.moment = moment;
         this.client = client;
+        setOs(orderStatus);
+    }
+
+    public OrderStatus getOs() {
+        return OrderStatus.getOrder(orderStatus);
+    }
+
+    public void setOs(OrderStatus os) {
+        if (os != null) {
+
+            this.orderStatus = os.getCode();
+
+        }
     }
 
     public Long getId() {
