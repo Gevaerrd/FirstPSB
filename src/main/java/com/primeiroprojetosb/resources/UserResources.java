@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.primeiroprojetosb.entities.User;
+import com.primeiroprojetosb.repository.UserRepository;
 import com.primeiroprojetosb.services.UserService;
 
 @RestController // Significa que essa classe vai lidar com requisições, get, post, etc...
@@ -18,6 +19,8 @@ public class UserResources {
 
     @Autowired // Injeta a dependencia pra não precisar instanciar
     private UserService service;
+    @Autowired
+    private UserRepository repository;
 
     // ResponseEntity sempre espera um tipo
     @GetMapping
@@ -36,5 +39,12 @@ public class UserResources {
         return ResponseEntity.ok().body(u);
 
     }
+
+    // @GetMapping(value = "/{id}") // Argumento depois do users do requestmapping
+    // public ResponseEntity<User> findById(@PathVariable Long id) { // Path
+    // variable mostra que vai receber argumento
+    // Optional<User> user = repository.findById(id);
+    // return ResponseEntity.ok().body(user.get()); // get transforma o Optional no
+    // objeto dele
 
 }
