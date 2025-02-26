@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // import jakarta.persistence.Entity;
 // import jakarta.persistence.GeneratedValue;
 // import jakarta.persistence.GenerationType;
@@ -31,6 +33,8 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
+    @JsonIgnore // Serve para ignorar o campo anotado abaixo, ignorando Order ele nao repete
+                // client
     @OneToMany(mappedBy = "client") // Significa que essa entidade esta relacionada a varias client
     private List<Order> orders = new ArrayList<>();
 
