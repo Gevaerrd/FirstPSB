@@ -1,6 +1,8 @@
 package com.primeiroprojetosb.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "tb_categories")
@@ -22,15 +25,21 @@ public class Category implements Serializable {
     @JoinColumn(name = "category")
     private String name;
 
-    // @OneToMany
-    // private List<Product> products = new ArrayList<>();
+    @Transient
+    private Set<Product> products = new HashSet<>();
 
     public Category() {
+        this.products = new HashSet<>();
 
     }
 
     public Category(String name) {
+        this.products = new HashSet<>();
         this.name = name;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     public Long getId() {
