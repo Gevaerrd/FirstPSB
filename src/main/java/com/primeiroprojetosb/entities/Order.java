@@ -30,7 +30,7 @@ public class Order implements Serializable {
 
     private Integer orderStatus;
 
-    @ManyToOne // Muitos para um
+    @ManyToOne // Muitos pedidos para um cliente
     @JoinColumn(name = "client_id") // Nome que vai ficar no banco de dados
     private User client;
 

@@ -65,6 +65,15 @@ public class TestConfig implements CommandLineRunner { // Injeção de dependenc
         cr.saveAll(Arrays.asList(cat1, cat2, cat3));
         pr.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
+        p1.getCategories().add(cat2); // Pega a categoria e adiciona
+        p2.getCategories().add(cat1);
+        p2.getCategories().add(cat3);
+        p3.getCategories().add(cat3);
+        p4.getCategories().add(cat3);
+        p5.getCategories().add(cat2);
+
+        pr.saveAll(Arrays.asList(p1, p2, p3, p4, p5)); // Salvando novamente
+
     }
 
 }
