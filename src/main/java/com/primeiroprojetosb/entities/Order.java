@@ -10,9 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -38,8 +37,7 @@ public class Order implements Serializable {
     @JoinColumn(name = "client_id") // Nome que vai ficar no banco de dados nesse lado, ele que manda
     private User client;
 
-    @ManyToMany // Um pedido pode ter muitos itens
-    @JoinTable(name = "tb_order_and_order_item", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "order_item_id"))
+    @OneToMany(mappedBy = "order") // Um pedido pode ter muitos itens
     private Set<OrderItem> items = new HashSet<>();
 
     private Order() {

@@ -1,15 +1,12 @@
 package com.primeiroprojetosb.entities;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,7 +20,6 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnore
     @ManyToOne // Muitos OrderItems podem estar associados a um único Order, pegando só o id
     @JoinColumn(name = "order_id") // Esta é a chave estrangeira que aponta para a tabela 'Order'
     private Order order;
@@ -31,10 +27,6 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(name = "product_id") // ManyToOne só pra pegar o Id
     private Product product;
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "items") // Ele faz o mappedBy por não ser o principal
-    private Set<Order> orders = new HashSet<>();
 
     private Integer quantity;
     private Double price;
@@ -50,6 +42,7 @@ public class OrderItem {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder() {
         return order;
     }
@@ -102,10 +95,6 @@ public class OrderItem {
         }
         final OrderItem other = (OrderItem) obj;
         return Objects.equals(this.id, other.id);
-    }
-
-    public Set<Order> getOrders() {
-        return orders;
     }
 
     public Long getId() {
