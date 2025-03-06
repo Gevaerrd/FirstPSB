@@ -15,10 +15,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.primeiroprojetosb.entities.Category;
 import com.primeiroprojetosb.entities.Order;
+import com.primeiroprojetosb.entities.OrderItem;
 import com.primeiroprojetosb.entities.Product;
 import com.primeiroprojetosb.entities.User;
 import com.primeiroprojetosb.enums.OrderStatus;
 import com.primeiroprojetosb.repository.CategoryRepository;
+import com.primeiroprojetosb.repository.OrderItemRepository;
 import com.primeiroprojetosb.repository.OrderRepository;
 import com.primeiroprojetosb.repository.ProductRepository;
 import com.primeiroprojetosb.repository.UserRepository;
@@ -41,6 +43,9 @@ public class TestConfig implements CommandLineRunner { // Injeção de dependenc
     @Autowired
     private ProductRepository pr;
 
+    @Autowired
+    private OrderItemRepository oir;
+
     @Override
     public void run(String... args) throws Exception {
         Category cat1 = new Category("Electronics");
@@ -60,10 +65,17 @@ public class TestConfig implements CommandLineRunner { // Injeção de dependenc
         Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2, OrderStatus.WAITING_PAYMENT);
         Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1, OrderStatus.DELIVERED);
 
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
         us.saveAll(Arrays.asList(u1, u2));
         or.saveAll(Arrays.asList(o1, o2, o3));
         cr.saveAll(Arrays.asList(cat1, cat2, cat3));
         pr.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
+        oir.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 
         p1.getCategories().add(cat2); // Pega a categoria e adiciona
         p2.getCategories().add(cat1);
@@ -71,6 +83,13 @@ public class TestConfig implements CommandLineRunner { // Injeção de dependenc
         p3.getCategories().add(cat3);
         p4.getCategories().add(cat3);
         p5.getCategories().add(cat2);
+
+        o1.getItems().add(oi1);
+        o1.getItems().add(oi2);
+        o2.getItems().add(oi3);
+        o3.getItems().add(oi4);
+
+        or.saveAll(Arrays.asList(o1, o2, o3));
 
         pr.saveAll(Arrays.asList(p1, p2, p3, p4, p5)); // Salvando novamente
 

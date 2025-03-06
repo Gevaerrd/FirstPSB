@@ -2,12 +2,16 @@ package com.primeiroprojetosb.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,7 +22,7 @@ import com.primeiroprojetosb.enums.OrderStatus;
 @Table(name = "tb_order")
 public class Order implements Serializable {
 
-    private final static long serializable = 1L;
+    private final static long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +34,13 @@ public class Order implements Serializable {
 
     private Integer orderStatus;
 
-    @ManyToOne // Muitos pedidos para um cliente
-    @JoinColumn(name = "client_id") // Nome que vai ficar no banco de dados
+    @ManyToOne // Muitos pedidos associados a um cliente
+    @JoinColumn(name = "client_id") // Nome que vai ficar no banco de dados nesse lado, ele que manda
     private User client;
+
+    @ManyToMany // Um pedido pode ter muitos itens
+    @JoinTable(name = "tb_order_and_order_item", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "order_item_id"))
+    private Set<OrderItem> items = new HashSet<>();
 
     private Order() {
 
@@ -43,6 +51,10 @@ public class Order implements Serializable {
         this.moment = moment;
         this.client = client;
         setOs(orderStatus);
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
     }
 
     public OrderStatus getOs() {

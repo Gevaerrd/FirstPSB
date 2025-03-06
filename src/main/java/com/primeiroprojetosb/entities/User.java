@@ -35,7 +35,7 @@ public class User implements Serializable {
 
     @JsonIgnore // Serve para ignorar o campo anotado abaixo, ignorando Order ele nao repete
                 // client
-    @OneToMany(mappedBy = "client") // Significa que essa entidade esta relacionada a varias client
+    @OneToMany(mappedBy = "client") // Significa que essa entidade esta relacionada a varios Order
     private List<Order> orders = new ArrayList<>();
 
     public User() {

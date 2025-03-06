@@ -28,7 +28,7 @@ public class Category implements Serializable {
     private String name;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "categories") // A tabela que vai procurar/associar
+    @ManyToMany(mappedBy = "categories") // A tabela que vai procurar/associar, por ser mappedBy não é a principal
     private Set<Product> products = new HashSet<>();
 
     public Category() {
