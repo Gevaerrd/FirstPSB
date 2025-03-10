@@ -28,4 +28,14 @@ public class UserService {
         return user.get(); // Retorna o objeto dentro do optional
 
     }
+
+    public User insertUser(User user) {
+        return ur.save(user);
+    }
+
+    public void deleteById(Long id) {
+        if (ur.existsById(id)) {
+            ur.deleteById(id);
+        }
+    }
 }
