@@ -57,6 +57,19 @@ public class Order implements Serializable {
         setOs(orderStatus);
     }
 
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.getOrder(orderStatus);
+    }
+
+    public double getTotal() {
+        double total = 0;
+        for (OrderItem oi : items) {
+            total += oi.getSubTotal();
+        }
+
+        return total;
+    }
+
     public Payment getPayment() {
         return payment;
     }
@@ -67,10 +80,6 @@ public class Order implements Serializable {
 
     public Set<OrderItem> getItems() {
         return items;
-    }
-
-    public OrderStatus getOs() {
-        return OrderStatus.getOrder(orderStatus);
     }
 
     public void setOs(OrderStatus os) {
