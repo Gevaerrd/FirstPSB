@@ -1,0 +1,96 @@
+[33mcommit 2c2bdd8f27c4ae89bfbf81b8c1286ccc780ab931[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Tue Mar 11 20:14:31 2025 -0300
+
+    Função atualizar usuario
+
+[33mcommit 43cdf26067c50358b6e776dc0443583650dfe655[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Mon Mar 10 20:35:42 2025 -0300
+
+    Adicionando inseração de usuário
+
+[33mcommit e3f4981740fc15886e19aa4ecba99960078dc926[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Mon Mar 10 19:59:50 2025 -0300
+
+    Adicionando subtotal e total
+
+[33mcommit e48b48317726bdff150da052a211a334d5f57e22[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Fri Mar 7 16:47:01 2025 -0300
+
+    Entidade payment e associação com Order
+
+[33mcommit 40e0f4a3ff2a60d00e198e8096319b732d7817e4[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Thu Mar 6 20:49:42 2025 -0300
+
+    Associação Product/OrdemItem OneToMany
+
+[33mcommit 1862477ac9f0d096ca242033a5321f34a086f24d[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Wed Mar 5 21:08:40 2025 -0300
+
+    Adicionado Set no Order e OrderItem
+
+[33mcommit 9010f3bf6b788a6c04e78fbdaec9b11346a77711[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Mon Mar 3 21:05:04 2025 -0300
+
+    Assosiacao de many-to-many
+
+[33mcommit a98ab932b84d5f4bfa24261646e88add9026cd32[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Mon Mar 3 20:23:14 2025 -0300
+
+    Product entity and functions
+
+[33mcommit 836ced42951c15f459eebd3794af7f82f4f0de66[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Fri Feb 28 16:18:16 2025 -0300
+
+    Category functions and entity
+
+[33mcommit f654d6895e5c85d4f71acb824bb2fde2af52a5f4[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Wed Feb 26 20:59:38 2025 -0300
+
+    OrderStatus enum
+
+[33mcommit 4661a02efe5d793c2f1f5b0565c39a539cd0c3fd[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Wed Feb 26 20:07:38 2025 -0300
+
+    Order, Instant e JsonIgnore
+
+[33mcommit 06e13f628e8a803f64193d1cc692b6e686aa4857[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Tue Feb 25 21:02:23 2025 -0300
+
+    Nova entidade order e associando a User com MTM e OTM
+
+[33mcommit f0c12e4216434d3adb9d020ebb92a9cb0f15336f[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Tue Feb 25 20:23:21 2025 -0300
+
+    Adicionando service e trabalhando o resource
+
+[33mcommit 1929fc6ba63bae7b2b5229fb513bec36b3203680[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Mon Feb 24 20:38:38 2025 -0300
+
+    Repository, Injeção dependencia, database seedind
+
+[33mcommit be232b87a84ada05cb0db3ff9d59b28295f6f476[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Thu Feb 20 20:16:24 2025 -0300
+
+    Add User and UserResource, confi main to read pack
+    :wq
+
+[33mcommit 6c483d34d54dc5d48ab39a8d12ff3256ab413326[m
+Author: Gevaerrd <gevaerrd@hotmail.com>
+Date:   Wed Feb 19 19:26:02 2025 -0300
+
+    Starting project
