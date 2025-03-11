@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,15 +58,15 @@ public class UserResources {
         return ResponseEntity.created(uri).body(user);
     }
 
-    @GetMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         service.deleteById(id);
         return ResponseEntity.ok().body("Aeee deu bom");
 
     }
 
-    @PostMapping(value = "/update")
-    public ResponseEntity<String> updateUser(@RequestBody User user) {
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User user) {
         service.updateUser(user);
         return ResponseEntity.ok().body("Atualizado");
     }

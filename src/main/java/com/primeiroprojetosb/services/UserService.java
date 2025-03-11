@@ -39,6 +39,12 @@ public class UserService {
         }
     }
 
+    public void updateData(User user, User obj) {
+        user.setName(obj.getName());
+        user.setEmail(obj.getEmail());
+        user.setPhone(obj.getPhone());
+    }
+
     public void updateUser(User user) {
         ur.save(user);
     }
