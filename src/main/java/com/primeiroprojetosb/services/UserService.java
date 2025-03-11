@@ -38,4 +38,8 @@ public class UserService {
             ur.deleteById(id);
         }
     }
+
+    public void updateUser(User user) {
+        ur.save(user);
+    }
 }

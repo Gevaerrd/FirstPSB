@@ -26,6 +26,9 @@ public class UserResources {
     @Autowired
     private UserRepository repository;
 
+    public UserResources() {
+    }
+
     // ResponseEntity sempre espera um tipo
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
@@ -44,7 +47,7 @@ public class UserResources {
 
     }
 
-    @PostMapping
+    @PostMapping(value = "/create")
     // RequestBody faz o JSON ser convertido em um objeto
     public ResponseEntity<User> createUser(@RequestBody User user) {
         service.insertUser(user);
@@ -58,6 +61,12 @@ public class UserResources {
         service.deleteById(id);
         return ResponseEntity.ok().body("Aeee deu bom");
 
+    }
+
+    @PostMapping(value = "/update")
+    public ResponseEntity<String> updateUser(@RequestBody User user) {
+        service.updateUser(user);
+        return ResponseEntity.ok().body("Atualizado");
     }
 
     // @GetMapping(value = "/{id}") // Argumento depois do users do requestmapping
