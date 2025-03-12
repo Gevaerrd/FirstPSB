@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.primeiroprojetosb.entities.User;
 import com.primeiroprojetosb.repository.UserRepository;
+import com.primeiroprojetosb.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -25,7 +26,8 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> user = ur.findById(id);
-        return user.get(); // Retorna o objeto dentro do optional
+        return user.orElseThrow(() -> new ResourceNotFoundException(id));
+        // Tenta fazer o . get, caso contrario chama a exceção
 
     }
 
@@ -45,7 +47,9 @@ public class UserService {
         user.setPhone(obj.getPhone());
     }
 
-    public void updateUser(User user) {
+    public void updateUser(Long id, User obj) {
+        User user = findById(id);
+        updateData(user, obj);
         ur.save(user);
     }
 }
