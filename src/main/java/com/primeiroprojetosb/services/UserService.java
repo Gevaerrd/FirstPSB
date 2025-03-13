@@ -1,8 +1,11 @@
 package com.primeiroprojetosb.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,6 +23,8 @@ import com.primeiroprojetosb.services.exceptions.ResourceNotFoundException;
 @Service
 public class UserService {
 
+    private final CategoryService categoryService;
+
     private final CategoryResources categoryResources;
 
     private final CategoryRepository categoryRepository;
@@ -27,9 +32,11 @@ public class UserService {
     @Autowired // Injeta a dependencia pra não precisar instanciar
     private UserRepository ur;
 
-    UserService(CategoryRepository categoryRepository, CategoryResources categoryResources) {
+    UserService(CategoryRepository categoryRepository, CategoryResources categoryResources,
+            CategoryService categoryService) {
         this.categoryRepository = categoryRepository;
         this.categoryResources = categoryResources;
+        this.categoryService = categoryService;
     }
 
     public List<User> findAll() {
@@ -40,9 +47,18 @@ public class UserService {
     }
 
     public User findById(Long id) {
-        Optional<User> user = ur.findById(id);
-        return user.orElseThrow(() -> new ResourceNotFoundException(id));
-        // Tenta fazer o . get, caso contrario chama a exceção
+        try {
+
+            Optional<User> user = ur.findById(id);
+            return user.get();
+        }
+
+        catch (NoSuchElementException e) {
+            throw new ResourceNotFoundException(id);
+        }
+
+        // return user.orElseThrow(() -> new ResourceNotFoundException(id));
+        // Tenta fazer o . get, caso contrario chama a exceção, dava pra fazer assim
 
     }
 
@@ -72,9 +88,18 @@ public class UserService {
         user.setPhone(obj.getPhone());
     }
 
-    public void updateUser(Long id, User obj) {
-        User user = findById(id);
-        updateData(user, obj);
-        ur.save(user);
+    public User updateUser(Long id, User obj) {
+        try {
+
+            User user = ur.getOne(id);
+            updateData(user, obj);
+            ur.save(user);
+            return user;
+
+        }
+
+        catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 }
