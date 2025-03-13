@@ -5,17 +5,32 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.primeiroprojetosb.entities.User;
+import com.primeiroprojetosb.repository.CategoryRepository;
 import com.primeiroprojetosb.repository.UserRepository;
+import com.primeiroprojetosb.resources.CategoryResources;
+import com.primeiroprojetosb.services.exceptions.DataIntegrityException;
+import com.primeiroprojetosb.services.exceptions.EmptyResultException;
 import com.primeiroprojetosb.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
 
+    private final CategoryResources categoryResources;
+
+    private final CategoryRepository categoryRepository;
+
     @Autowired // Injeta a dependencia pra não precisar instanciar
     private UserRepository ur;
+
+    UserService(CategoryRepository categoryRepository, CategoryResources categoryResources) {
+        this.categoryRepository = categoryRepository;
+        this.categoryResources = categoryResources;
+    }
 
     public List<User> findAll() {
         List<User> users = ur.findAll();
@@ -36,8 +51,18 @@ public class UserService {
     }
 
     public void deleteById(Long id) {
-        if (ur.existsById(id)) {
+        // Pra descobrir o nome das classes de exceção, fazer RunTimeException
+        // e dar e.printstracktrace pra ver o nome
+        try {
             ur.deleteById(id);
+        }
+
+        catch (EmptyResultDataAccessException e) {
+            throw new EmptyResultException(id);
+        }
+
+        catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException(e.getMessage());
         }
     }
 
